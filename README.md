@@ -1,15 +1,10 @@
-# angular-demo-router-final
-
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/angular-demo-router-final)
-
-
 # Angular Demo Router Final
 
-Demo Project part of <a href="https://angular.ac" target="_blank">Angular Academy Workshop</a> #176 in December 2019.
+Demo Project part of <a href="https://angular.ac" target="_blank">Angular Academy Workshop</a>.
 
 ## Try it live in Stackblitz without installation!
 
-<a href="https://stackblitz.com/github/ldex/Angular-Academy-176" target="_blank">Angular Demo App</a> 
+<a href="https://stackblitz.com/github/ldex/angular-demo-router-final" target="_blank">Angular Demo Router Final</a> 
 
 
 ## Local installation
