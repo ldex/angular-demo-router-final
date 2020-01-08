@@ -6,6 +6,7 @@ import { fadeInAnimation } from '../animations';
 
 @Component({
     templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
     animations: [fadeInAnimation],
     host: { '[@fadeInAnimation]': ''}
 })
