@@ -11,23 +11,23 @@ import { environment } from '../environments/environment';
 import { LoginRouteGuardService } from './services/login-route-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo:'/home', pathMatch:'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent, canActivate:[LoginRouteGuardService] },
+  { path: 'admin', component: AdminComponent, canActivate: [LoginRouteGuardService] },
   { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
   { path: 'contact', component: ComposeMessageComponent, outlet: 'side' },
   { path: 'error', component: ErrorComponent },
-  { path: '**', redirectTo:'/error?reason=NavError' }
+  { path: '**', redirectTo: '/error?reason=NavError' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,
-     { 
+    {
       preloadingStrategy: PreloadAllModules,
-      enableTracing: environment.production ? false : true
+      enableTracing: environment.production ? false : false
     }
-     )],
+  )],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

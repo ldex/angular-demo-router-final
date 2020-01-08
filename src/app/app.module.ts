@@ -2,7 +2,7 @@ import { AdminService } from './services/admin.service';
 import { ErrorComponent } from './common/error.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './common/login.component';
-import { LoginService } from './services/login.service';
+import { AuthService } from './services/auth.service';
 import { AdminComponent } from './common/admin.component';
 import { ContactComponent } from './common/contact.component';
 import { HomeComponent } from './common/home.component';
@@ -42,7 +42,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     })
   ],
   providers: [
-    LoginService,
+    AuthService,
     AdminService
   ],
   bootstrap: [AppComponent]

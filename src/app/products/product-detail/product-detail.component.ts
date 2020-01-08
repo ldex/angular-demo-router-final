@@ -2,17 +2,16 @@ import { Observable, Subscription } from 'rxjs';
 import { ProductService } from './../../services/product.service';
 import { FavouriteService } from './../../services/favourite.service';
 import { Product } from './../product.interface';
-import { Component, OnInit, Input, Output, EventEmitter, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { slideInOutAnimation } from '../../animations';
-import { map } from "rxjs/operators";
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
   animations: [slideInOutAnimation],
-  host: { '[@slideInOutAnimation]': ''}
+  host: { '[@slideInOutAnimation]': '' }
 })
 export class ProductDetailComponent implements OnInit {
 
@@ -32,16 +31,15 @@ export class ProductDetailComponent implements OnInit {
   deleteProduct(id: number) {
     if (window.confirm('Are you sure to delete this product ?')) {
       this.productService
-          .deleteProduct(id)
-          .subscribe(
-              response => {
-                  console.log('Product deleted.');
-                  this.productService.clearCache();
-                  this.router.navigateByUrl("/products");
-              },
-              error => console.log('Could not delete product. ' + error),
-              () => console.log('Delete Product Complete.')
-          );
+        .deleteProduct(id)
+        .subscribe(
+          () => {
+            console.log('Product deleted.');
+            this.productService.clearCache();
+            this.router.navigateByUrl("/products");
+          },
+          error => console.log('Could not delete product. ' + error)
+        );
     }
   }
 

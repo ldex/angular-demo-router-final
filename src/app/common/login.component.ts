@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
-import { LoginService } from './../services/login.service';
-import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { fadeInAnimation } from '../animations';
 
@@ -8,25 +8,23 @@ import { fadeInAnimation } from '../animations';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
     animations: [fadeInAnimation],
-    host: { '[@fadeInAnimation]': ''}
+    host: { '[@fadeInAnimation]': '' }
 })
-export class LoginComponent {
-
-    error: string = '';
+export class LoginComponent implements AfterViewInit {
+    error = '';
 
     constructor(
-        private loginService: LoginService,
+        private authService: AuthService,
         private router: Router
     ) { }
 
     loginUser(form: NgForm) {
-        console.log(form.value);
         if (form.valid) {
-            this.loginService
+            this.authService
                 .login(form.value.username, form.value.password)
                 .subscribe(
                     result => {
-                        if(result) {
+                        if (result) {
                             this.router.navigateByUrl('/admin');
                         } else {
                             this.error = 'Invalid username or password!';
@@ -34,5 +32,15 @@ export class LoginComponent {
                     }
                 );
         }
+    }
+
+    ngAfterViewInit(): void {
+        this.setFocus();
+    }
+
+    @ViewChild('username', { static: false }) myInput: ElementRef;
+
+    setFocus() {
+        this.myInput.nativeElement.focus();
     }
 }
