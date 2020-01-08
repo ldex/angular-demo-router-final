@@ -5,6 +5,7 @@ import { Product } from './../product.interface';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { slideInOutAnimation } from '../../animations';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-detail',
@@ -25,7 +26,9 @@ export class ProductDetailComponent implements OnInit {
     private favouriteService: FavouriteService,
     private productService: ProductService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private titleService: Title,
+    private metaTagService: Meta
   ) { }
 
   deleteProduct(id: number) {
@@ -53,6 +56,8 @@ export class ProductDetailComponent implements OnInit {
     // With resolver
     this.product = this.route.snapshot.data['product'];
 
+    this.setSEO(this.product);
+
     // Avec router state (dans template: product$ | async as product)
     // this.product$ = this
     //                   .route
@@ -66,6 +71,11 @@ export class ProductDetailComponent implements OnInit {
     // if (id) {
     //     this.product$ = this.productService.getProductById(id);
     // }
+  }
+
+  private setSEO(product: Product) {
+    this.titleService.setTitle('Product Details: ' + product.name);
+    this.metaTagService.updateTag({ name: 'description', content: 'Details page for product ' + product.name });
   }
 
 }

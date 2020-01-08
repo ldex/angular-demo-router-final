@@ -57,6 +57,9 @@
     margin-right: .8em;
     border-radius: 4px 0px 0px 4px;
     width: 30%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .products .price {
     float: right;
@@ -74,12 +77,34 @@
     border-radius: 0px 4px 4px 0px;
   }
   .products .description {
+    height: 1.8em;
     display: inline-block;
     width: 40%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .products .discontinued, .products .discontinued * {
+  .products .discontinued, .products .discontinued *, .errorMessage  {
     color: red !important;
   }
+
+
+/* loading spinner */
+.loading {
+    display: inline-block;
+    overflow: hidden;
+    height: 1.3em;
+    margin-top: -0.3em;
+    line-height: 1.5em;
+    vertical-align: text-bottom;
+  }
+  
+  .loading::after {
+    display: inline-table;
+    white-space: pre;
+    text-align: left;
+    content: "◎◎◎\A◉◎◎\A◎◉◎\A◎◎◉";
+    animation: spin 1s steps(4) infinite;
+  }
+
+  @keyframes spin  { to { transform: translateY( -6.0em); } }

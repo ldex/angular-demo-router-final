@@ -1,14 +1,14 @@
 import { Product } from './../products/product.interface';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map, tap, flatMap, first, catchError, shareReplay, switchMap, delay } from "rxjs/operators";
-import { environment } from '../../environments/environment';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { flatMap, first, catchError, shareReplay, switchMap, delay } from "rxjs/operators";
+import { config } from '../../environments/environment';
 
 @Injectable()
 export class ProductService {
 
-    private baseUrl: string = "https://storerestservice.azurewebsites.net/api/products/";
+    private baseUrl: string = config.apiUrl;
 
     private products$: Observable<Product[]>;
 
@@ -34,14 +34,15 @@ export class ProductService {
             )
     }
 
-    getProducts(skip:number = 0, take:number = 10): Observable<Product[]> {
+    getProducts(skip: number = 0, take: number = 10): Observable<Product[]> {
 
-        let url:string = this.baseUrl + `?$skip=${skip}&$top=${take}&$orderby=ModifiedDate%20desc`;
-        
+        let url: string = this.baseUrl + `?$skip=${skip}&$top=${take}&$orderby=ModifiedDate%20desc`;
+
         if (!this.products$) {
             this.products$ = this.http
                 .get<any>(url)
                 .pipe(
+                    delay(2000),
                     shareReplay(),
                     catchError(this.handleError)
                 );
@@ -49,17 +50,17 @@ export class ProductService {
         return this.products$;
     }
 
-    getMoreProducts(skip:number = 0, take:number = 10): Observable<Product[]> {
-        let url:string = this.baseUrl + `?$skip=${skip}&$top=${take}&$orderby=ModifiedDate%20desc`;
+    getMoreProducts(skip: number = 0, take: number = 10): Observable<Product[]> {
+        let url: string = this.baseUrl + `?$skip=${skip}&$top=${take}&$orderby=ModifiedDate%20desc`;
 
-        const combine$: Observable<Product[]> = 
+        const combine$: Observable<Product[]> =
             this.products$.pipe(switchMap(
                 res => { return this.http.get<Product[]>(url).pipe(shareReplay()) },
                 (currentProducts, moreProducts) => currentProducts.concat(moreProducts)
             ));
-        this.products$ = combine$.pipe(shareReplay());  
+        this.products$ = combine$.pipe(shareReplay());
 
-        return this.products$;      
+        return this.products$;
     }
 
     clearCache() {
@@ -67,16 +68,19 @@ export class ProductService {
     }
 
     private handleError(errorResponse: HttpErrorResponse) {
+        // in a real world app, you may send the error to the server using some remote logging infrastructure
+        // instead of just logging it to the console
         let errorMsg: string;
-        if (errorResponse.error instanceof Error) {
+        if (errorResponse.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
             errorMsg = 'An error occurred:' + errorResponse.error.message;
         } else {
             // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong,
+            // The response body may contain clues as to what went wrong.
             errorMsg = `Backend returned code ${errorResponse.status}, body was: ${errorResponse.error}`;
         }
         console.error(errorMsg);
-        return Observable.throw(errorMsg);
+        // return an observable with a user-facing error message
+        return throwError('Something bad happened; please try again later.');
     }
 }

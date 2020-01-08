@@ -25,7 +25,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes,
     {
       preloadingStrategy: PreloadAllModules,
-      enableTracing: environment.production ? false : false
+      enableTracing: environment.production ? false : true
     }
   )],
   exports: [RouterModule],

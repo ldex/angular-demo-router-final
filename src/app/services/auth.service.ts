@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from "rxjs/operators";
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { config } from '../../environments/environment';
 
 interface LoginResponse {
   error: string,
@@ -14,8 +15,7 @@ export class AuthService {
 
   private loggedIn: boolean = false;
   private readonly storageTokenKey: string = 'auth_token';
-  // Used to fake auth from server
-  private baseUrl: string = 'https://demo4545606.mockable.io/api/login';
+  private baseUrl: string = config.authUrl;
 
   constructor(
     private http: HttpClient,

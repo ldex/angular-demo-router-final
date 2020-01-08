@@ -8,3 +8,8 @@ export const environment = {
   demo: true,
   offline: false
 };
+
+export const config = {
+  apiUrl: 'https://storerestservice.azurewebsites.net/api/products/',
+  authUrl: 'https://demo4545606.mockable.io/api/login'
+};

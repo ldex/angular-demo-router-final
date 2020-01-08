@@ -7,13 +7,15 @@ import { AdminComponent } from './common/admin.component';
 import { ContactComponent } from './common/contact.component';
 import { HomeComponent } from './common/home.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ComposeMessageComponent } from './common/compose-message.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { RouteReuseStrategy } from '@angular/router';
+import { CacheRouteReuseStrategy } from './cache-route-reuse.strategy';
 
 
 @NgModule({
@@ -43,7 +45,11 @@ import { JwtModule } from '@auth0/angular-jwt';
   ],
   providers: [
     AuthService,
-    AdminService
+    AdminService,
+    {
+      provide: RouteReuseStrategy,
+      useClass: CacheRouteReuseStrategy
+    }
   ],
   bootstrap: [AppComponent]
 })
