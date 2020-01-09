@@ -16,19 +16,6 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private router: Router) {
 
-    router.events
-      .pipe(
-        filter((evt) => evt instanceof NavigationStart || evt instanceof NavigationEnd)
-      )
-      .subscribe((evt) => {
-        //  console.log(evt);
-        if (evt instanceof NavigationStart) {
-          //  console.log("Route Change Start!");
-        } else if (evt instanceof NavigationEnd) {
-          // console.log("Route Change End!");
-        }
-      })
-
   }
 
   get isLoggedIn(): boolean {
