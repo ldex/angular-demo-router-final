@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 
@@ -18,12 +18,10 @@ export class ProductsComponent {
     router
       .events
       .pipe(
-        filter(evt => evt instanceof NavigationEnd)
+        filter((evt:RouterEvent) => evt instanceof NavigationEnd && evt.url == '/products')
       )
-      .subscribe((evt: NavigationEnd) => {
-        if (evt.url == '/products') {
+      .subscribe(() => {
           this.titleService.setTitle('Products List');
-        }
       })
   }
 
