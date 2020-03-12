@@ -18,10 +18,10 @@ export class ProductsComponent {
     router
       .events
       .pipe(
-        filter((evt:RouterEvent) => evt instanceof NavigationEnd && evt.url == '/products')
+        filter((evt: RouterEvent) => evt instanceof NavigationEnd && evt.url == '/products')
       )
       .subscribe(() => {
-          this.titleService.setTitle('Products List');
+        this.titleService.setTitle('Products List');
       })
   }
 

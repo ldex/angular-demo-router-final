@@ -59,8 +59,8 @@ export class ProductListComponent implements OnInit {
 
     onSelect(product: Product): void {
         this.selectedProduct = product;
-        this.router.navigateByUrl("/products/" + product.id);
-        // this.router.navigateByUrl("/products/" + product.id, { state: product });
+        //  this.router.navigateByUrl("/products/" + product.id);
+         this.router.navigateByUrl("/products/" + product.id, { state: product });
     }
 
     message: string = "";
