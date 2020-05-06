@@ -12,11 +12,11 @@ import { catchError } from 'rxjs/operators';
     selector: 'app-product-list',
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.css'],
-    animations: [fadeInAnimation],
-    host: { '[@fadeInAnimation]': '' }
+    animations: [fadeInAnimation]
 })
 export class ProductListComponent implements OnInit {
 
+    @HostBinding('@fadeInAnimation') animation = true;
     title = "Products";
     products$: Observable<Product[]>;
     selectedProduct: Product;

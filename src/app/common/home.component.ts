@@ -6,9 +6,10 @@ import { Title, Meta } from '@angular/platform-browser';
 @Component({
     templateUrl: './home.component.html',
     animations: [fadeInAnimation],
-    host: { '[@fadeInAnimation]': '' }
 })
 export class HomeComponent implements OnInit {
+
+    @HostBinding('@fadeInAnimation') animation = true;
 
     constructor(
         private router: Router,

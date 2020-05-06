@@ -2,7 +2,7 @@ import { Observable, Subscription } from 'rxjs';
 import { ProductService } from './../../services/product.service';
 import { FavouriteService } from './../../services/favourite.service';
 import { Product } from './../product.interface';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { slideInOutAnimation } from '../../animations';
 import { Title, Meta } from '@angular/platform-browser';
@@ -11,11 +11,11 @@ import { Title, Meta } from '@angular/platform-browser';
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
-  animations: [slideInOutAnimation],
-  host: { '[@slideInOutAnimation]': '' }
+  animations: [slideInOutAnimation]
 })
 export class ProductDetailComponent implements OnInit {
 
+  @HostBinding('@slideInOutAnimation') animation = true;
   @Input() product: Product;
   product$: Observable<Product>;
   productSub: Subscription;
