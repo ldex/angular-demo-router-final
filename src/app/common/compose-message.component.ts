@@ -22,15 +22,15 @@ export class ComposeMessageComponent {
  
     setTimeout(() => {
       this.sending = false;
-      this.closePopup();
+      this.clearSideOutlet();
     }, 1000);
   }
  
   cancel() {
-    this.closePopup();
+    this.clearSideOutlet();
   }
  
-  closePopup() {
+  clearSideOutlet() {
     // Providing a `null` value to the named outlet
     // clears the contents of the named outlet
     this.router.navigate([{ outlets: { side: null }}]);
