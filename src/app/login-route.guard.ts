@@ -7,7 +7,7 @@ import {
 } from "@angular/router";
 import { AuthService } from "./services";
 
-export const LoginRouteGuard: CanActivateFn = (
+export const loginRouteGuard: CanActivateFn = (
   next: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => {
