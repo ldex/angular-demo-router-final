@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
+import { PreloadAllModules, provideRouter, withDebugTracing, withPreloading } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -15,6 +15,8 @@ export const appConfig: ApplicationConfig = {
     providers: [
         ProductService,
         FavouriteService,
+        AuthService,
+        AdminService,
         importProvidersFrom(BrowserModule, FormsModule, JwtModule.forRoot({
             config: {
                 tokenGetter: () => {
@@ -23,11 +25,10 @@ export const appConfig: ApplicationConfig = {
                 allowedDomains: ['localhost:4200']
             }
         })),
-        AuthService,
-        AdminService,
         provideHttpClient(withInterceptorsFromDi()),
         provideRouter(
             routes,
+            withDebugTracing(),
             withPreloading(PreloadAllModules)
         ),
         provideAnimations()
