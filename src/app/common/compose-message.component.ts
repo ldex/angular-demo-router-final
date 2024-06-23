@@ -1,11 +1,14 @@
 import { Component, HostBinding } from '@angular/core';
 import { Router }                 from '@angular/router';
 import { slideInDownAnimation } from '../animations';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  templateUrl: './compose-message.component.html',
-  styleUrl: './compose-message.component.css',
-  animations: [slideInDownAnimation]
+    templateUrl: './compose-message.component.html',
+    styleUrl: './compose-message.component.css',
+    animations: [slideInDownAnimation],
+    standalone: true,
+    imports: [FormsModule]
 })
 export class ComposeMessageComponent {
   @HostBinding('@slideInDownAnimation') animation;

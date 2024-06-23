@@ -4,7 +4,8 @@ import { fadeInAnimation } from '../animations';
 
 @Component({
     templateUrl: './error.component.html',
-    animations: [fadeInAnimation]
+    animations: [fadeInAnimation],
+    standalone: true
 })
 export class ErrorComponent implements OnInit {
     @HostBinding('@fadeInAnimation') animation;

@@ -4,7 +4,8 @@ import { Component, HostBinding } from '@angular/core';
 
 @Component({
     templateUrl: './admin.component.html',
-    animations: [fadeInAnimation]
+    animations: [fadeInAnimation],
+    standalone: true
 })
 export class AdminComponent {
     @HostBinding('@fadeInAnimation') animation;

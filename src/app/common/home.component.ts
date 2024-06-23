@@ -5,7 +5,8 @@ import { Title } from '@angular/platform-browser';
 
 @Component({
     templateUrl: './home.component.html',
-    animations: [fadeInAnimation]
+    animations: [fadeInAnimation],
+    standalone: true
 })
 export class HomeComponent implements OnInit {
     @HostBinding('@fadeInAnimation') animation;

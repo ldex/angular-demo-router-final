@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { catchError, delay, throwError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { ProductService } from '../services';
 import { Product } from './product.interface';
 import { Router, ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
@@ -12,7 +12,6 @@ export const productResolver: ResolveFn<Product> = (route: ActivatedRouteSnapsho
    return productService
        .getProductById(id)
        .pipe(
-            delay(1500),
            catchError(
                () => {
                    router.navigateByUrl('/products');
