@@ -11,7 +11,7 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent, title: 'Home Page' },
     { path: 'login', component: LoginComponent, title: 'Login' },
     { path: 'admin', component: AdminComponent, title: 'Admin', canActivate: [loginRouteGuard] },
-    { path: 'products', loadChildren: () => import('./products/products.routes').then(m => m.productsRoutes) },
+    { path: 'products', loadChildren: () => import('./products/products.routes').then(r => r.productsRoutes) },
     { path: 'contact', component: ComposeMessageComponent, outlet: 'side' },
     { path: 'error', component: ErrorComponent, title: 'Error' },
     { path: '**', redirectTo:'/error?reason=NavError' }
