@@ -8,7 +8,6 @@ import { fadeInAnimation } from '../animations';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
     animations: [fadeInAnimation],
-    standalone: true,
     imports: [FormsModule]
 })
 export class LoginComponent implements AfterViewInit, OnInit {

@@ -14,7 +14,6 @@ import { AsyncPipe, UpperCasePipe, JsonPipe, SlicePipe, CurrencyPipe } from '@an
     templateUrl: './product-list.component.html',
     styleUrl: './product-list.component.css',
     animations: [fadeInAnimation],
-    standalone: true,
     imports: [RouterLink, AsyncPipe, UpperCasePipe, JsonPipe, SlicePipe, CurrencyPipe, OrderBy]
 })
 export class ProductListComponent implements OnInit {

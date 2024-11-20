@@ -14,7 +14,6 @@ import { UpperCasePipe, CurrencyPipe, DatePipe } from '@angular/common';
     templateUrl: './product-detail.component.html',
     styleUrl: './product-detail.component.css',
     animations: [slideInOutAnimation],
-    standalone: true,
     imports: [RouterLink, UpperCasePipe, CurrencyPipe, DatePipe]
 })
 export class ProductDetailComponent implements OnInit {
