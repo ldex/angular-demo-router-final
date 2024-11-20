@@ -92,7 +92,6 @@ export class ProductService {
     this.http
       .get(this.baseUrl, options)
       .pipe(
-        delay(500),
         tap(response => {
           let count = response.headers.get('X-Total-Count') // total number of products
           if(count)
